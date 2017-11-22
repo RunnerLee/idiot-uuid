@@ -1,0 +1,18 @@
+<phpunit
+        colors="true"
+        bootstrap="vendor/autoload.php"
+>
+    <testsuites>
+        <testsuite name="idiot-uuid">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">src</directory>
+            <exclude>
+                <directory suffix=".php">src/Console</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>

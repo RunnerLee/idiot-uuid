@@ -1,0 +1,23 @@
+{
+    "name": "runner/idiot-uuid",
+    "description": "idiot uuid for idiot",
+    "type": "library",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "RunnerLee",
+            "email": "runnerleer@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Runner\\IdiotUuid\\": "src/"
+        }
+    },
+    "require": {
+        "predis/predis": "^1.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.0"
+    }
+}
