@@ -4,4 +4,4 @@ php:
 services:
   - redis-server
 install: composer install
-script: bin/phpunit
+script: vendor/bin/phpunit
