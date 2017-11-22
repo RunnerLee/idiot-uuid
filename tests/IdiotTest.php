@@ -4,19 +4,17 @@
  * @email: runnerleer@gmail.com
  * @time: 2017-11
  */
-
-use Runner\IdiotUuid\Idiot;
 use Predis\Client;
+use Runner\IdiotUuid\Idiot;
 
 class IdiotTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testApply()
     {
         $client = new Client([
-            'host' => '127.0.0.1',
-            'port' => '6379',
-            'auth' => null,
+            'host'     => '127.0.0.1',
+            'port'     => '6379',
+            'auth'     => null,
             'database' => 1,
         ]);
 
@@ -33,5 +31,4 @@ class IdiotTest extends \PHPUnit_Framework_TestCase
             Idiot::REDIS_AVAILABLE_SEEDS,
         ]);
     }
-
 }
