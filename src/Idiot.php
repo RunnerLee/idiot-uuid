@@ -7,8 +7,8 @@
 
 namespace Runner\IdiotUuid;
 
-use Predis\Client;
 use Exception;
+use Predis\Client;
 
 class Idiot
 {
@@ -23,6 +23,7 @@ class Idiot
 
     /**
      * Coupon constructor.
+     *
      * @param Client $client
      */
     public function __construct(Client $client)
@@ -31,7 +32,7 @@ class Idiot
     }
 
     /**
-     * 初始化种子池, 提出头尾两个种子, 剩下可用码数 2176650000
+     * 初始化种子池, 提出头尾两个种子, 剩下可用码数 2176650000.
      *
      * @return void
      */
@@ -44,12 +45,13 @@ class Idiot
     }
 
     /**
-     * @return string
      * @throws Exception
+     *
+     * @return string
      */
     public function apply()
     {
-        /**
+        /*
          * 从有效种子池中获取一个有效的种子
          */
         if (is_null($index = $this->redis->srandmember(static::REDIS_AVAILABLE_SEEDS))) {
@@ -57,28 +59,28 @@ class Idiot
         }
 
         /**
-         * 获取种子的使用次数
+         * 获取种子的使用次数.
          */
-        $score = (int)$this->redis->zscore(static::REDIS_SEEDS, $index);
+        $score = (int) $this->redis->zscore(static::REDIS_SEEDS, $index);
 
         /**
          * 计算 code 值
          */
-        $number = (int)$index * 50000 + $score;
+        $number = (int) $index * 50000 + $score;
 
-        /**
+        /*
          * 自增种子使用次数, 供下次直接使用
          */
         $this->redis->zincrby(static::REDIS_SEEDS, 1, $index);
 
-        /**
+        /*
          * 如果种子使用次数达到 50000 次, 从有效池中移除
          */
         if (49999 === $score) {
             $this->redis->srem(static::REDIS_AVAILABLE_SEEDS, $index);
         }
 
-        /**
+        /*
          * 返回三十六进制的 code
          */
         return str_pad(base_convert($number, 10, 36), 6, '0', STR_PAD_LEFT);
