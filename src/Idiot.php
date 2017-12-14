@@ -85,4 +85,14 @@ class Idiot
          */
         return str_pad(base_convert($number, 10, 36), 6, '0', STR_PAD_LEFT);
     }
+
+    public function getSeedsWithScore()
+    {
+        return $this->redis->zrange(static::REDIS_SEEDS, 0, -1, 'WITHSCORES');
+    }
+
+    public function getAvailableScopes()
+    {
+        return $this->redis->smembers(static::REDIS_AVAILABLE_SEEDS);
+    }
 }
