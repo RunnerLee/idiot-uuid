@@ -51,7 +51,7 @@ class Idiot
      */
     public function apply()
     {
-        /**
+        /*
          * 从有效种子池中获取一个有效的种子
          */
         if (is_null($index = $this->redis->srandmember(static::REDIS_AVAILABLE_SEEDS))) {
@@ -59,7 +59,7 @@ class Idiot
         }
 
         /**
-         * 获取种子使用次数
+         * 获取种子使用次数.
          */
         $score = (int) $this->redis->zincrby(static::REDIS_SEEDS, 1, $index);
 
@@ -72,14 +72,14 @@ class Idiot
          */
         $number = (int) $index * 50000 + $score;
 
-        /**
+        /*
          * 种子使用次数达到一定数量就弃用
          */
         if (49990 <= $score) {
             $this->redis->srem(static::REDIS_AVAILABLE_SEEDS, $index);
         }
 
-        /**
+        /*
          * 返回三十六进制的 code
          */
         return str_pad(base_convert($number, 10, 36), 6, '0', STR_PAD_LEFT);
