@@ -47,7 +47,7 @@ class Idiot
     /**
      * @throws Exception
      *
-     * @return string
+     * @return Code
      */
     public function apply()
     {
@@ -79,10 +79,7 @@ class Idiot
             $this->redis->srem(static::REDIS_AVAILABLE_SEEDS, $index);
         }
 
-        /**
-         * 返回三十六进制的 code
-         */
-        return str_pad(base_convert($number, 10, 36), 6, '0', STR_PAD_LEFT);
+        return new Code($index, $score, $number);
     }
 
     public function getSeedsWithScore()
