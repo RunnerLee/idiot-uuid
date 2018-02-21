@@ -24,7 +24,7 @@ class IdiotTest extends \PHPUnit_Framework_TestCase
 
         $code = $idiot->apply();
 
-        $this->assertRegExp('/^[a-z0-9]{6}$/', (string)$code);
+        $this->assertRegExp('/^[a-z0-9]{6}$/', (string) $code);
 
         $client->del([
             Idiot::REDIS_SEEDS,
