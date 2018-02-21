@@ -9,7 +9,6 @@ namespace Runner\IdiotUuid;
 
 class Code
 {
-
     /**
      * @var int
      */
@@ -27,6 +26,7 @@ class Code
 
     /**
      * Code constructor.
+     *
      * @param int $index
      * @param int $score
      * @param int $number
